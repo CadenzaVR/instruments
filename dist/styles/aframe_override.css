@@ -1,0 +1,11 @@
+.a-enter-vr-button {
+  position: relative;
+  float: right;
+  margin-left: 10px;
+  background-color: rgba(56, 86, 119, 0.35);
+}
+
+.a-enter-vr-button:active,
+.a-enter-vr-button:hover {
+  background-color: rgba(56, 86, 119, 0.85);
+}

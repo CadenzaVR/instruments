@@ -1,0 +1,28 @@
+{
+  "name": "webvr-instruments",
+  "version": "0.1.0",
+  "description": "WebVR Instruments",
+  "private": true,
+  "scripts": {
+    "build": "webpack",
+    "start:dev": "webpack-dev-server --inline --host 0.0.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oliverfei/webvr-instruments.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oliverfei/webvr-instruments/issues"
+  },
+  "homepage": "https://github.com/oliverfei/webvr-instruments#readme",
+  "dependencies": {
+    "aframe-haptics-component": "^1.6.3"
+  },
+  "devDependencies": {
+    "webpack": "^4.46.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.2"
+  }
+}

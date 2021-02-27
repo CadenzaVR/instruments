@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="" />
+    <!-- polyfill -->
+    <script src="js/shim/Base64.js" type="text/javascript"></script>
+    <script src="js/shim/Base64binary.js" type="text/javascript"></script>
+    <script src="js/shim/WebAudioAPI.js" type="text/javascript"></script>
+    <!-- midi.js package -->
+    <script src="js/midi/audioDetect.js" type="text/javascript"></script>
+    <script src="js/midi/gm.js" type="text/javascript"></script>
+    <script src="js/midi/loader.js" type="text/javascript"></script>
+    <script src="js/midi/plugin.audiotag.js" type="text/javascript"></script>
+    <script src="js/midi/plugin.webaudio.js" type="text/javascript"></script>
+    <script src="js/midi/plugin.webmidi.js" type="text/javascript"></script>
+    <!-- utils -->
+    <script src="js/util/dom_request_xhr.js" type="text/javascript"></script>
+    <script src="js/util/dom_request_script.js" type="text/javascript"></script>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="instruments-vr.js"></script>
+    <link href="/styles/aframe_override.css" rel="stylesheet" />
+    <link href="/styles/instruments-vr.css" rel="stylesheet" />
+    <title>Cadenza!!</title>
+  </head>
+  <body>
+    <a-scene background>
+      <a-assets>
+        <a-mixin
+          id="key"
+          geometry="height: 0.1; width: 0.15; depth:0.4"
+          material="color: white; emissive:#fff; emissiveIntensity: 0.1; opacity: 0.2"
+          key
+        >
+        </a-mixin>
+
+        <a-mixin
+          id="mallet"
+          geometry="primitive: cylinder; height: 0.43; radius: 0.004;"
+          material="color: #fff; opacity: 0.5"
+        >
+        </a-mixin>
+
+        <a-mixin
+          id="mallet-head"
+          position="0 -0.215 0"
+          geometry="primitive: sphere; radius: 0.02"
+          material="shader: flat; color: white"
+        >
+        </a-mixin>
+      </a-assets>
+
+      <a-entity game-controller></a-entity>
+
+      <!-- <a-entity gltf-model="#marimba" scale="0.0256 0.0256 0.0256"></a-entity> -->
+
+      <a-entity
+        id="camera"
+        camera="far: 2000; near: 0.1"
+        look-controls="enabled: false"
+        position="0 1.6 0.5"
+        rotation="-10 0 0"
+        game-camera
+      ></a-entity>
+
+      <a-entity id="flash-card" position="0 1.5 -0.6" music-flashcard> </a-entity>
+      <a-text width="1" wrap-count="50" value="Controls\nReposition Mallet: Trigger Button\nSpread Mallets: Joystick X\nGrab Image: Grip Button\nScale Image: Joystick Y (while grabbing)\nToggle Bounce: B (Rift/Quest) or Trackpad Up(Vive/WMR)" position="1 1.5 -0.6" rotation="0 -50 0"></a-text>
+
+      <a-entity
+        id="leftHand"
+        vive-controls="hand: left"
+        oculus-touch-controls="hand: left"
+        windows-motion-controls="hand: left"
+        haptics
+      >
+        <a-entity>
+          <a-entity detachable>
+            <a-box id="mallet1" mixin="mallet" rotation="90 0 0">
+              <a-entity
+                id="mallet-head1"
+                mixin="mallet-head"
+                mallet="rotateDirection: 1"
+              >
+              </a-entity>
+            </a-box>
+          </a-entity>
+        </a-entity>
+        <a-entity>
+          <a-entity detachable>
+            <a-box id="mallet3" mixin="mallet" rotation="90 0 0">
+              <a-entity
+                id="mallet-head3"
+                mixin="mallet-head"
+                mallet="rotateDirection: -1"
+              >
+              </a-entity>
+            </a-box>
+          </a-entity>
+        </a-entity>
+      </a-entity>
+
+      <a-entity
+        id="rightHand"
+        vive-controls="hand: right"
+        oculus-touch-controls="hand: right"
+        windows-motion-controls="hand: right"
+        haptics
+      >
+        <a-entity>
+          <a-entity detachable>
+            <a-box id="mallet2" mixin="mallet" rotation="90 0 0">
+              <a-entity
+                id="mallet-head2"
+                mixin="mallet-head"
+                mallet="rotateDirection: 1; xAxisMultiplier: -1"
+              >
+              </a-entity>
+            </a-box>
+          </a-entity>
+        </a-entity>
+        <a-entity>
+          <a-entity detachable>
+            <a-box id="mallet4" mixin="mallet" rotation="90 0 0">
+              <a-entity
+                id="mallet-head4"
+                mixin="mallet-head"
+                mallet="rotateDirection: -1; xAxisMultiplier: -1"
+              >
+              </a-entity>
+            </a-box>
+          </a-entity>
+        </a-entity>
+      </a-entity>
+    </a-scene>
+    <div
+      id="file-import-container"
+    >
+      <div>
+        <label for="image-input">Load image from local file:</label>
+        <input
+          type="file"
+          accept="image/*"
+          id="image-input"
+          name="image-input"
+        />
+      </div>
+      <div>
+        <label for="url-input">Load image from external url:</label>
+        <input type="text" id="url-input" name="url-input" />
+        <button id="url-input-button">Load</button>
+      </div>
+    </div>
+  </body>
+</html>
